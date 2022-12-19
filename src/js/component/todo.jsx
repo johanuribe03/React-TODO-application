@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 
 const ToDo = () => {
-    const [input, setInput] = useState('hola');
+    const [inputValue, setInputValue] = useState('');
+    const [todos, setTodos] = useState([]);
+
+    // Add into array -> concat
+    // Delet from array -> filter
+    // Update -> map
 
     return (
         <div>
@@ -13,9 +18,31 @@ const ToDo = () => {
             </style>
 
             <h1>todos</h1>
-            <input id="input" type="text" onChange={e => setInput(e.target.value)} value={input} />
+            <input 
+                id="input" 
+                type="text" 
+                onChange={(e) => {
+                    return setInputValue(e.target.value);
+                }} 
+                value={inputValue}
+                onKeyPress={(e) => {
+                    e.key === "Enter" ? 
+                    setTodos(todos.concat(inputValue)) ;
+                    setInputValue("")
+                }
+                placeholder="What do you need to do"
+            />
+
+            {todos.map((t) => { //for each todo i want an li
+                <li>
+                    {t} <i class="fas fa-trash-alt"></i>
+                </li>
+            })}
+
             {/* <input type="text" onChange={e => setInputValue(e.target.value)} value={inputValue} /> */}
-            <li>{document.querySelector('input').value}</li>
+                {/* <li>{document.querySelector('input').value}</li> */}
+                {/* <li>{input}</li> */}
+
             
             {/* { const createNode = (el) => { 
                 return document.createElement(el)
