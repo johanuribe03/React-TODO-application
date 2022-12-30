@@ -5,52 +5,53 @@ const ToDo = () => {
     const [todos, setTodos] = useState([]);
 
     // Add into array -> concat
-    // Delet from array -> filter
+    // Delete from array -> filter
     // Update -> map
 
     return (
         <div>
-            {/* <style jsx global>{`
+            <style jsx global>{`
                 h1 {
                     font-size: 90px;
                 }
             `}
-            </style> */}
+            </style>
 
-            <h1>todos {inputValue}</h1>
+            <h1>todos</h1>
             <ul>
                 <li>
                     <input  
                         type="text" 
-                        onChange={(e) => 
-                            setInputValue(e.target.value)
-                        }
+                        onChange={(e) => setInputValue(e.target.value)}
                         value={inputValue}
                         onKeyDown={(e) => {
                             if (e.key === "Enter") {
-                                console.log("Enter HOla");
                                 setTodos(todos.concat(inputValue));
                                 setInputValue("");
                                 console.log(inputValue);
                                 console.log(todos);
-
                                 console.log(setInputValue);
                             }
-                            // e.key === "Enter" ? 
-                            // setTodos(todos.concat(inputValue)) ;
-                            // setInputValue("")
                         
                         } }
                         placeholder="What do you need to do?"
                     ></input>
                 </li>
 
-                {todos.map((t) => { //for each todo i want an li
+                {todos.map((item, index) => ( //for each todo i want an li
                     <li>
-                        hola 
+                        {item} <p 
+                                onClick={() => 
+                                    setTodos(
+                                        todos.filter(
+                                            (t, currentIndex) =>
+                                            index != currentIndex
+                                        )
+
+                                )}>x</p>
                         {/* <i class="fas fa-trash-alt"></i> */}
                     </li>
-                })}
+                ))}
             </ul>
 
             {/* <input type="text" onChange={e => setInputValue(e.target.value)} value={inputValue} /> */}
